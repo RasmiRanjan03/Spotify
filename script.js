@@ -13,7 +13,7 @@ function formatTime(seconds) {
     return `${mins}:${formattedSecs}`;
 }
 async function fetchSpotifyData(folder) {
-    let data= await fetch(`http://127.0.0.1:5500/spotify/songs/${folder}/`)
+    let data= await fetch(`/${folder}/`)
     let res= await data.text();
     let div=document.createElement("div");
     div.innerHTML=res;
@@ -72,7 +72,7 @@ function playmusic(songname) {
   document.querySelector('.songtimmer').innerHTML = "0:00 / 0:00";
 }
 async function getplaylists() {
-    let data= await fetch('http://127.0.0.1:5500/spotify/songs/')
+    let data= await fetch('/songs/')
     let res= await data.text();
     let div=document.createElement("div");
     div.innerHTML=res;
@@ -82,7 +82,7 @@ async function getplaylists() {
         const element = array[index];
         if(element.href.includes('songs/')){
             let foldername=element.href.split('/songs/')[1];
-            let a= await fetch(`http://127.0.0.1:5500/spotify/songs/${foldername}/info.json`);
+            let a= await fetch(`/songs/${foldername}/info.json`);
             let info= await a.json();
             document.querySelectorAll('.cardholder')[0].innerHTML+=`<div data-folder="${foldername}" class="card">
              <div> <img src="songs/${foldername}/cover.jpg" alt="">
